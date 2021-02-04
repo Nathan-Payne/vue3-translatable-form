@@ -1,7 +1,5 @@
 # 2021-translatable_form
 
-# Dashboard UI
-
 Vue 3 form component utilising JSON language data to replace form labels and headers from user interface.
 
 ## Comments
