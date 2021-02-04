@@ -15,12 +15,12 @@
             />
           </svg>
         </div>
-        <p class="welcome-message">Good afternoon</p>
+        <p class="welcome-message">{{ languageLabels.welcome_message }}</p>
       </header>
 
       <form action="" @submit.prevent="submitForm">
         <div class="form-control">
-          <label for="user-name">Username</label>
+          <label for="user-name">{{ languageLabels.username_label }}</label>
           <input
             id="user-name"
             name="user-name"
@@ -30,14 +30,17 @@
         </div>
 
         <div class="form-control">
-          <label for="password">Password</label>
-          <input type="password" id="password" name="password" />
+          <label for="password">{{ languageLabels.password_label }}</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            v-model="password"
+          />
         </div>
 
         <div class="form-control">
-          <button>
-            Login
-          </button>
+          <button>{{ languageLabels.login_label }}</button>
         </div>
       </form>
     </div>
@@ -45,12 +48,26 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
+  props: {
+    loginLanguage: {
+      type: String,
+      default: 'english',
+    },
+  },
   data() {
     return {
       userName: null,
       password: null,
+      languageLabels: {},
     }
+  },
+  watch: {
+    loginLanguage() {
+      this.getLanguageLabels()
+    },
   },
   methods: {
     submitForm() {
@@ -58,8 +75,18 @@ export default {
       this.resetForm()
     },
     resetForm() {
-      //reset all form elements
+      //clears all form inputs
+      this.userName = ''
+      this.password = ''
     },
+    getLanguageLabels() {
+      axios.get(`/languages/${this.loginLanguage}.json`).then(res => {
+        this.languageLabels = res.data
+      })
+    },
+  },
+  created() {
+    this.getLanguageLabels()
   },
 }
 </script>
@@ -106,7 +133,6 @@ main {
 .form-control {
   display: flex;
   flex-direction: column;
-  /* padding: 1rem 1rem; */
   margin: 2.5rem 2rem;
 }
 
@@ -116,7 +142,6 @@ main {
 
 .form-control input {
   width: 21rem;
-  /* height: 2.5rem; */
   line-height: 1.5rem;
   font-size: 1.5rem;
   padding: 5px;

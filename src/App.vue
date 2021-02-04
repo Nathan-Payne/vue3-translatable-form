@@ -5,13 +5,13 @@
     </template>
 
     <template #controls>
-      <button>It's Pirate Day!</button>
-      <button>English</button>
-      <button>French</button>
+      <button @click="setPirate">It's Pirate Day!</button>
+      <button @click="setEnglish">English</button>
+      <button @click="setFrench">French</button>
     </template>
   </the-header>
 
-  <the-form></the-form>
+  <the-form :login-language="loginLanguage"></the-form>
 </template>
 
 <script>
@@ -23,6 +23,22 @@ export default {
   components: {
     TheForm,
     TheHeader,
+  },
+  data() {
+    return {
+      loginLanguage: 'english',
+    }
+  },
+  methods: {
+    setPirate() {
+      this.loginLanguage = 'pirate'
+    },
+    setEnglish() {
+      this.loginLanguage = 'english'
+    },
+    setFrench() {
+      this.loginLanguage = 'french'
+    },
   },
 }
 </script>
@@ -42,7 +58,7 @@ export default {
 }
 
 button {
-  padding: 0.8rem 1rem;
+  padding: 0.8rem 0.8rem;
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
   background-color: #ff4282;
@@ -50,5 +66,16 @@ button {
   text-transform: uppercase;
   border: none;
   border-radius: 6px;
+  cursor: pointer;
+  transition: all 200ms ease-out;
+}
+
+button:hover {
+  background-color: #f80e5c;
+  transition: all 200ms ease-out;
+}
+
+button:focus {
+  outline: none;
 }
 </style>
