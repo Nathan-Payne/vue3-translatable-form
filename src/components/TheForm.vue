@@ -71,7 +71,7 @@ export default {
   },
   methods: {
     submitForm() {
-      //submission logic, POST req
+      //submission/validation logic -> POST req
       this.resetForm()
     },
     resetForm() {
