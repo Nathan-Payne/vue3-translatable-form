@@ -79,10 +79,18 @@ export default {
       this.userName = ''
       this.password = ''
     },
-    getLanguageLabels() {
-      axios.get(`/languages/${this.loginLanguage}.json`).then(res => {
-        this.languageLabels = res.data
-      })
+    async getLanguageLabels() {
+      // can remove demo button and check dateToday === datePirateDay to run automatically
+      if (this.loginLanguage === 'pirate') {
+        const englishDefault = await axios.get('/languages/english.json')
+        const pirateLanguage = await axios.get('/languages/pirate.json')
+        this.languageLabels = { ...englishDefault.data, ...pirateLanguage.data }
+      } else {
+        const languageData = await axios.get(
+          `/languages/${this.loginLanguage}.json`
+        )
+        this.languageLabels = languageData.data
+      }
     },
   },
   created() {
