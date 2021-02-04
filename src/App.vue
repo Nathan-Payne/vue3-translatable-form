@@ -34,9 +34,21 @@ export default {
 }
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+  background-color: #eeeeee;
+}
+
+button {
+  padding: 0.8rem 1rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  background-color: #ff4282;
+  color: white;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 6px;
 }
 </style>
